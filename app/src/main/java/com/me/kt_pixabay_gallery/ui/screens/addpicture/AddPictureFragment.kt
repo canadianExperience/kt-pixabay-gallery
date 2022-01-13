@@ -1,4 +1,4 @@
-package com.me.kt_pixabay_gallery.ui.screens
+package com.me.kt_pixabay_gallery.ui.screens.addpicture
 
 import android.os.Bundle
 import android.view.View
