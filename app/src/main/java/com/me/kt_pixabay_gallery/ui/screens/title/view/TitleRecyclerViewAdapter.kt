@@ -1,4 +1,4 @@
-package com.me.kt_pixabay_gallery.ui.screens.title
+package com.me.kt_pixabay_gallery.ui.screens.title.view
 
 import android.view.LayoutInflater
 import android.view.View

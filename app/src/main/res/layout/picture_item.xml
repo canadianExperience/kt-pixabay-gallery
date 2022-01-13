@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/pictureImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_launcher_background" />
 </LinearLayout>

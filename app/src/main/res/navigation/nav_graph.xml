@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.me.kt_pixabay_gallery.ui.screens.title.TitleFragment"
+        android:name="com.me.kt_pixabay_gallery.ui.screens.title.view.TitleFragment"
         android:label="TitleFragment"
         tools:layout="@layout/fragment_title">
         <action
