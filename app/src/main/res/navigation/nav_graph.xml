@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPictureFragment"
-        android:name="com.me.kt_pixabay_gallery.ui.screens.addpicture.AddPictureFragment"
+        android:name="com.me.kt_pixabay_gallery.ui.screens.addpicture.view.AddPictureFragment"
         android:label="AddPictureFragment"
         tools:layout="@layout/fragment_add_picture">
         <action
