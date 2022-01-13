@@ -20,6 +20,10 @@ class TitleViewModel
 )
     : ViewModel() {
 
+    fun updateFavorite(isFavorite: Boolean, id: Int) = viewModelScope.launch {
+        repository.updatePictureIsFavorite(isFavorite, id)
+    }
+
     private val picturesFlow = repository.getPictures()
     val pictures: LiveData<List<Picture>> get() = picturesFlow.asLiveData()
 }

@@ -3,6 +3,7 @@ package com.me.kt_pixabay_gallery.ui.screens.title.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -19,6 +20,7 @@ class TitleRecyclerViewAdapter @Inject constructor(
     class PictureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private var onItemClickListener: ((String) -> Unit) ?= null
+    private var onFavoriteClickListener: ((Pair<Boolean,Int>) -> Unit) ?= null
 
     private val diffUtil = object : DiffUtil.ItemCallback<Picture>(){
         override fun areItemsTheSame(oldItem: Picture, newItem: Picture): Boolean {
@@ -45,17 +47,34 @@ class TitleRecyclerViewAdapter @Inject constructor(
         onItemClickListener = listener
     }
 
+    fun setOnFavoriteClickListener(listener : (Pair<Boolean,Int>) -> Unit){
+        onFavoriteClickListener = listener
+    }
+
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
         val imageView = holder.itemView.findViewById<ImageView>(R.id.pictureImageView)
-        val url = pictures[position].url
+        val checkBox = holder.itemView.findViewById<CheckBox>(R.id.favoriteCheckBox)
+        val picture = pictures[position]
         holder.itemView.apply {
-            glide.load(url).into(imageView)
+            glide.load(picture.url).into(imageView)
             this.setOnClickListener {
                 onItemClickListener?.let {
-                        it(url)
+                        it(picture.url)
                 }
             }
         }
+
+        checkBox.setOnClickListener {
+            onFavoriteClickListener?.let { pair ->
+                val id = picture.id
+                id?.let {
+                    pair(Pair(!picture.isFavorite,it))
+                }
+
+            }
+        }
+
+        checkBox.isChecked = picture.isFavorite
     }
 
     override fun getItemCount(): Int {

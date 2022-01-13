@@ -21,6 +21,10 @@ class PictureRepository @Inject constructor(
         pictureDao.deletePicture(picture)
     }
 
+    override suspend fun updatePictureIsFavorite(bool: Boolean, id: Int) {
+        pictureDao.updatePictureIsFavorite(bool, id)
+    }
+
     override fun getPictures(): Flow<List<Picture>> {
         return pictureDao.getPictures()
     }

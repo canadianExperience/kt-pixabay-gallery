@@ -41,6 +41,10 @@ class TitleFragment @Inject constructor(
           //  Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
 
+        titleRecyclerViewAdapter.apply {
+            setOnFavoriteClickListener {viewModel.updateFavorite(it.first, it.second)}
+        }
+
         viewModel.pictures.observe(viewLifecycleOwner){
             titleRecyclerViewAdapter.pictures = it?: listOf()
         }

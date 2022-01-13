@@ -15,6 +15,9 @@ interface PictureDao {
     @Delete
     suspend fun deletePicture(picture: Picture)
 
+    @Query("UPDATE pictures_table SET isFavorite=:bool WHERE id=:id")
+    suspend fun updatePictureIsFavorite(bool: Boolean, id: Int)
+
     @Query("SELECT * FROM pictures_table")
     fun getPictures(): Flow<List<Picture>>
 }
