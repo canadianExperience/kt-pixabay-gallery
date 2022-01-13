@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.me.kt_pixabay_gallery.ui.screens.TitleFragment"
+        android:label="TitleFragment"
+        tools:layout="@layout/fragment_title">
+        <action
+            android:id="@+id/titleFragment_to_addPictureFragment"
+            app:destination="@id/addPictureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPictureFragment"
+        android:name="com.me.kt_pixabay_gallery.ui.screens.AddPictureFragment"
+        android:label="AddPictureFragment"
+        tools:layout="@layout/fragment_add_picture">
+        <action
+            android:id="@+id/addPictureFragment_to_zoomPictureFragment"
+            app:destination="@id/zoomPictureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/zoomPictureFragment"
+        android:name="com.me.kt_pixabay_gallery.ui.screens.ZoomPictureFragment"
+        android:label="ZoomPictureFragment"
+        tools:layout="@layout/fragment_zoom_picture"/>
+</navigation>
