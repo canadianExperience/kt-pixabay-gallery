@@ -42,6 +42,10 @@ class TitleViewModel
         titleEventChannel.send(TitleEvent.NavigateToZoomPictureFragment(url,id))
     }
 
+    fun onDeleteMessageResult(result: String) = viewModelScope.launch {
+        titleEventChannel.send(TitleEvent.ShowDeleteMessage(result))
+    }
+
     @ExperimentalCoroutinesApi
     private val picturesFlow: Flow<List<Picture>> = isShowFavorites.flatMapLatest{
         repository.showPictures(it)
@@ -53,6 +57,7 @@ class TitleViewModel
     sealed class TitleEvent{
         object NavigateToAddPictureFragment : TitleEvent()
         data class NavigateToZoomPictureFragment(val url: String, val id: Int) : TitleEvent()
+        data class ShowDeleteMessage(val message: String) : TitleEvent()
     }
 
 }

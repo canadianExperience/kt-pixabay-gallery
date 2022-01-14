@@ -5,7 +5,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -50,6 +52,19 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
             setOnFavoriteClickListener {viewModel.updateFavorite(it.first, it.second)}
         }
 
+        titleObservers()
+
+        getTitleEvents()
+
+        setFragmentResultListener("message_result"){ _, bundle ->
+            val result = bundle.getString("message_result")
+            viewModel.onDeleteMessageResult(result?:"")
+        }
+
+        setHasOptionsMenu(true)
+    }
+
+    private fun titleObservers(){
         viewModel.pictures.observe(viewLifecycleOwner){
             titleRecyclerViewAdapter.pictures = it?: listOf()
             menuItem?.isEnabled = !it.isNullOrEmpty()
@@ -59,10 +74,6 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
             val icon = getMenuIcon(it)
             menuItem?.setIcon(icon)
         }
-
-        getTitleEvents()
-
-        setHasOptionsMenu(true)
     }
 
     private fun getTitleEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
@@ -73,6 +84,9 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
                 }
                 is TitleViewModel.TitleEvent.NavigateToZoomPictureFragment -> {
                     goToZoomPictureFragment(event.url, event.id)
+                }
+                is TitleViewModel.TitleEvent.ShowDeleteMessage -> {
+                    Toast.makeText(requireContext(), event.message, Toast.LENGTH_LONG).show()
                 }
             }.exhaustive
         }

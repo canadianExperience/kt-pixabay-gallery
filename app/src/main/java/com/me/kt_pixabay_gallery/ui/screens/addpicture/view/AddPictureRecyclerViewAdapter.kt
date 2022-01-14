@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.me.kt_pixabay_gallery.R
-import javax.inject.Inject
 
 class AddPictureRecyclerViewAdapter (
     private val glide: RequestManager

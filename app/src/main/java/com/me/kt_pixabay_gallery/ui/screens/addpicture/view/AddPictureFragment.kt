@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,7 +16,7 @@ import com.me.kt_pixabay_gallery.util.Status
 import com.me.kt_pixabay_gallery.util.Util.exhaustive
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import javax.inject.Inject
+
 @AndroidEntryPoint
 class AddPictureFragment : Fragment(R.layout.fragment_add_picture) {
 

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.me.kt_pixabay_gallery.R
 import com.me.kt_pixabay_gallery.roomdb.Picture
-import javax.inject.Inject
 
 class TitleRecyclerViewAdapter(
     private val glide: RequestManager
