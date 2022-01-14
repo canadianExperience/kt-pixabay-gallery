@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_add_on_secondary_24dp.xml" value="0.19907407407407407" />
+        <entry key="app/src/main/res/drawable/ic_delete_control_normal_24dp.xml" value="0.24256410256410257" />
         <entry key="app/src/main/res/drawable/ic_favorite_control_normal_24dp.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/selector_favorite.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/selector_favorite_menu.xml" value="0.1640625" />
@@ -14,6 +15,7 @@
         <entry key="app/src/main/res/layout/fragment_title.xml" value="0.16185410334346503" />
         <entry key="app/src/main/res/layout/fragment_zoom_picture.xml" value="0.16185410334346503" />
         <entry key="app/src/main/res/layout/picture_item.xml" value="0.165" />
+        <entry key="app/src/main/res/menu/menu_zoom.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/menu/title_menu.xml" value="0.29074074074074074" />
       </map>
     </option>

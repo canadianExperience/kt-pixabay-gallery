@@ -69,6 +69,8 @@ dependencies {
     implementation "androidx.annotation:annotation:$androidXAnnotations"
     implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
     implementation "androidx.activity:activity-ktx:$activityVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayoutVersion"
+
     // Architecture Components
     //Room
     implementation "androidx.room:room-runtime:$roomVersion"

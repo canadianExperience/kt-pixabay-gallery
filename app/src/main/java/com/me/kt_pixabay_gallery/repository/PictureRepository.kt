@@ -20,8 +20,8 @@ class PictureRepository @Inject constructor(
         pictureDao.insertPicture(picture)
 
 
-    override suspend fun deletePicture(picture: Picture) =
-        pictureDao.deletePicture(picture)
+    override suspend fun deletePicture(id: Int) =
+        pictureDao.deletePicture(id)
 
     override suspend fun updatePictureIsFavorite(bool: Boolean, id: Int) =
         pictureDao.updatePictureIsFavorite(bool, id)

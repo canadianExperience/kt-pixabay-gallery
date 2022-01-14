@@ -11,6 +11,7 @@ import com.me.kt_pixabay_gallery.repository.PictureRepositoryInterface
 import com.me.kt_pixabay_gallery.roomdb.PictureDao
 import com.me.kt_pixabay_gallery.roomdb.PictureDataBase
 import com.me.kt_pixabay_gallery.util.Util.BASE_URL
+import com.me.kt_pixabay_gallery.util.Util.getProgressDrawable
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,7 +59,7 @@ object AppModule {
     fun injectGlide(@ApplicationContext context: Context) = Glide.with(context)
         .setDefaultRequestOptions(
             RequestOptions()
-                .placeholder(R.drawable.ic_launcher_foreground)
+                .placeholder(getProgressDrawable(context))
                 .error(R.drawable.ic_launcher_foreground)
         )
 }

@@ -1,6 +1,9 @@
 package com.me.kt_pixabay_gallery.ui.screens.zoom.view
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +24,23 @@ class ZoomPictureFragment: Fragment(R.layout.fragment_zoom_picture) {
         fragmentBinding = binding
 
         viewModel.glideRequestManager.load(viewModel.url).into(binding.zoomImageView)
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_zoom, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_delete -> {
+                viewModel.onDeletePictureClick()
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onDestroy() {

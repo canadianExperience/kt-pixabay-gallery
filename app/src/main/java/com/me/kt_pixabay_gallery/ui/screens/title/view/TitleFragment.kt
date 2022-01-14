@@ -42,7 +42,7 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
         }
 
         titleRecyclerViewAdapter.setOnItemClickListener {
-          goToZoomPictureFragment(it)
+          goToZoomPictureFragment(it.first, it.second)
         }
 
         titleRecyclerViewAdapter.apply {
@@ -55,9 +55,7 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
         }
 
         viewModel.isShowFavoritesLiveData.observe(viewLifecycleOwner){
-            val icon = if(it) R.drawable.ic_favorite_filled_control_normal_24dp else
-                R.drawable.ic_favorite_control_normal_24dp
-
+            val icon = getMenuIcon(it)
             menuItem?.setIcon(icon)
         }
 
@@ -69,6 +67,8 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
         inflater.inflate(R.menu.menu_title, menu)
 
         menuItem = menu.findItem(R.id.action_favorites)
+        val icon = getMenuIcon(viewModel.isShowFavoritesLiveData.value?:false)
+        menuItem?.setIcon(icon)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -82,13 +82,17 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
         }
     }
 
+    private fun getMenuIcon(isFavorite: Boolean) =
+        if(isFavorite) R.drawable.ic_favorite_filled_control_normal_24dp else
+            R.drawable.ic_favorite_control_normal_24dp
+
     private fun goToAddPictureFragment(){
         val action = TitleFragmentDirections.titleFragmentToAddPictureFragment()
         findNavController().navigate(action)
     }
 
-    private fun goToZoomPictureFragment(url: String){
-        val action = TitleFragmentDirections.titleFragmentToZoomPictureFragment(url)
+    private fun goToZoomPictureFragment(url: String, id: Int){
+        val action = TitleFragmentDirections.titleFragmentToZoomPictureFragment(url, id)
         findNavController().navigate(action)
     }
 

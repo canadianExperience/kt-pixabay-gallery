@@ -15,8 +15,8 @@ interface PictureDao {
     @Insert(onConflict = REPLACE)
     suspend fun insertPicture(picture: Picture)
 
-    @Delete
-    suspend fun deletePicture(picture: Picture)
+    @Query("DELETE FROM pictures_table WHERE id=:id")
+    suspend fun deletePicture(id: Int)
 
     @Query("UPDATE pictures_table SET isFavorite=:bool WHERE id=:id")
     suspend fun updatePictureIsFavorite(bool: Boolean, id: Int)

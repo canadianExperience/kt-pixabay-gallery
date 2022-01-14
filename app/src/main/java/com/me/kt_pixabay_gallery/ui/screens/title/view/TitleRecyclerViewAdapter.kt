@@ -19,7 +19,7 @@ class TitleRecyclerViewAdapter(
 
     class PictureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    private var onItemClickListener: ((String) -> Unit) ?= null
+    private var onItemClickListener: ((Pair<String, Int>) -> Unit) ?= null
     private var onFavoriteClickListener: ((Pair<Boolean,Int>) -> Unit) ?= null
 
     private val diffUtil = object : DiffUtil.ItemCallback<Picture>(){
@@ -43,7 +43,7 @@ class TitleRecyclerViewAdapter(
         return PictureViewHolder(view)
     }
 
-    fun setOnItemClickListener(listener : (String) -> Unit){
+    fun setOnItemClickListener(listener : (Pair<String, Int>) -> Unit){
         onItemClickListener = listener
     }
 
@@ -58,8 +58,11 @@ class TitleRecyclerViewAdapter(
         holder.itemView.apply {
             glide.load(picture.url).into(imageView)
             this.setOnClickListener {
-                onItemClickListener?.let {
-                        it(picture.url)
+                onItemClickListener?.let { pair->
+                    picture.id?.let {
+                        pair(Pair(picture.url, it))
+                    }
+
                 }
             }
         }
