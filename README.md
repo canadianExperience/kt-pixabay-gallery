@@ -9,4 +9,4 @@ Retrofit, Hilt, MVVM, Room DB, Navigation, Glide, Flow
 
 
 ## Demo
-![pixabay-gallery](https://user-images.githubusercontent.com/45378000/149578862-5f0fa8b5-7a99-42b6-a4d8-61ecc9f9a983.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/45378000/149580613-6f3e6c34-24f3-43bb-8e9b-e68d52503aa5.gif)
