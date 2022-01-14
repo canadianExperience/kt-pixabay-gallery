@@ -11,7 +11,7 @@ import com.bumptech.glide.RequestManager
 import com.me.kt_pixabay_gallery.R
 import javax.inject.Inject
 
-class AddPictureRecyclerViewAdapter @Inject constructor(
+class AddPictureRecyclerViewAdapter (
     private val glide: RequestManager
 ): RecyclerView.Adapter<AddPictureRecyclerViewAdapter.AddPictureViewHolder>(){
 

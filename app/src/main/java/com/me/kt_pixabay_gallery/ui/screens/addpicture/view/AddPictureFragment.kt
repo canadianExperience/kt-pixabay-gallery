@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,20 +15,20 @@ import com.me.kt_pixabay_gallery.databinding.FragmentAddPictureBinding
 import com.me.kt_pixabay_gallery.ui.screens.addpicture.viewmodel.AddPictureViewModel
 import com.me.kt_pixabay_gallery.util.Status
 import com.me.kt_pixabay_gallery.util.Util.exhaustive
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
-
-class AddPictureFragment @Inject constructor(
-    private val addPictureRecyclerViewAdapter: AddPictureRecyclerViewAdapter
-): Fragment(R.layout.fragment_add_picture) {
+@AndroidEntryPoint
+class AddPictureFragment : Fragment(R.layout.fragment_add_picture) {
 
     private var fragmentBinding: FragmentAddPictureBinding? = null
-    private lateinit var viewModel: AddPictureViewModel
+    private val viewModel: AddPictureViewModel by viewModels()
+    private lateinit var addPictureRecyclerViewAdapter: AddPictureRecyclerViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel =  ViewModelProvider(requireActivity())[AddPictureViewModel::class.java]
+        addPictureRecyclerViewAdapter = AddPictureRecyclerViewAdapter(viewModel.glideRequestManager)
 
         val binding = FragmentAddPictureBinding.bind(view)
         fragmentBinding = binding

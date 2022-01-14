@@ -14,13 +14,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
-    @Inject
-    lateinit var fragmentFactory: PictureFragmentFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        supportFragmentManager.fragmentFactory = fragmentFactory
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root

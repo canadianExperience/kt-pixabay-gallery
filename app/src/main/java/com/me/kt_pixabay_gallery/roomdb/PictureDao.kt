@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PictureDao {
+    fun showPictures(isFavorite: Boolean): Flow<List<Picture>> =
+        if(isFavorite) getFavoritePictures() else getPictures()
+
     @Insert(onConflict = REPLACE)
     suspend fun insertPicture(picture: Picture)
 
@@ -18,6 +21,9 @@ interface PictureDao {
     @Query("UPDATE pictures_table SET isFavorite=:bool WHERE id=:id")
     suspend fun updatePictureIsFavorite(bool: Boolean, id: Int)
 
-    @Query("SELECT * FROM pictures_table")
+    @Query("SELECT * FROM pictures_table ORDER BY id DESC")
     fun getPictures(): Flow<List<Picture>>
+
+    @Query("SELECT * FROM pictures_table WHERE isFavorite=1 ORDER BY id DESC")
+    fun getFavoritePictures(): Flow<List<Picture>>
 }

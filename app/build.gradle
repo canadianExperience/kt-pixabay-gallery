@@ -62,7 +62,6 @@ android {
 }
 
 dependencies {
-
     // App dependencies
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
@@ -89,6 +88,9 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //Zoom imageview
+    implementation "com.jsibbold:zoomage:$zoomageVersion"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

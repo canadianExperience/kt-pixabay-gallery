@@ -1,29 +1,33 @@
 package com.me.kt_pixabay_gallery.ui.screens.title.view
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.me.kt_pixabay_gallery.R
 import com.me.kt_pixabay_gallery.databinding.FragmentTitleBinding
-import com.me.kt_pixabay_gallery.ui.screens.addpicture.viewmodel.AddPictureViewModel
 import com.me.kt_pixabay_gallery.ui.screens.title.viewmodel.TitleViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
+@AndroidEntryPoint
+class TitleFragment : Fragment(R.layout.fragment_title) {
 
-class TitleFragment @Inject constructor(
-    private val titleRecyclerViewAdapter: TitleRecyclerViewAdapter
-) : Fragment(R.layout.fragment_title) {
-
-    private lateinit var viewModel: TitleViewModel
+    private val viewModel: TitleViewModel by viewModels()
     private var fragmentBinding: FragmentTitleBinding? = null
+    private var menuItem: MenuItem? = null
+    private lateinit var titleRecyclerViewAdapter: TitleRecyclerViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity())[TitleViewModel::class.java]
+        titleRecyclerViewAdapter = TitleRecyclerViewAdapter(viewModel.glideRequestManager)
 
         val binding = FragmentTitleBinding.bind(view)
         fragmentBinding = binding
@@ -38,7 +42,7 @@ class TitleFragment @Inject constructor(
         }
 
         titleRecyclerViewAdapter.setOnItemClickListener {
-          //  Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+          goToZoomPictureFragment(it)
         }
 
         titleRecyclerViewAdapter.apply {
@@ -47,11 +51,44 @@ class TitleFragment @Inject constructor(
 
         viewModel.pictures.observe(viewLifecycleOwner){
             titleRecyclerViewAdapter.pictures = it?: listOf()
+            menuItem?.isEnabled = !it.isNullOrEmpty()
+        }
+
+        viewModel.isShowFavoritesLiveData.observe(viewLifecycleOwner){
+            val icon = if(it) R.drawable.ic_favorite_filled_control_normal_24dp else
+                R.drawable.ic_favorite_control_normal_24dp
+
+            menuItem?.setIcon(icon)
+        }
+
+        setHasOptionsMenu(true)
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_title, menu)
+
+        menuItem = menu.findItem(R.id.action_favorites)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_favorites -> {
+                viewModel.setIsShowFavorites()
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
     private fun goToAddPictureFragment(){
         val action = TitleFragmentDirections.titleFragmentToAddPictureFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun goToZoomPictureFragment(url: String){
+        val action = TitleFragmentDirections.titleFragmentToZoomPictureFragment(url)
         findNavController().navigate(action)
     }
 

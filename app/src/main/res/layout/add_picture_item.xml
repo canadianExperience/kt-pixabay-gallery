@@ -5,6 +5,8 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:padding="4dp"
+        android:adjustViewBounds="true"
         android:id="@+id/pixabayPictureImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"

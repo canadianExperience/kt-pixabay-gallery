@@ -13,24 +13,21 @@ class PictureRepository @Inject constructor(
     private val retrofitAPI: RetrofitAPI
 ) : PictureRepositoryInterface {
 
-    override suspend fun insertPicture(picture: Picture) {
+    override fun showPictures(isFavorite: Boolean): Flow<List<Picture>> =
+        pictureDao.showPictures(isFavorite)
+
+    override suspend fun insertPicture(picture: Picture) =
         pictureDao.insertPicture(picture)
-    }
 
-    override suspend fun deletePicture(picture: Picture) {
+
+    override suspend fun deletePicture(picture: Picture) =
         pictureDao.deletePicture(picture)
-    }
 
-    override suspend fun updatePictureIsFavorite(bool: Boolean, id: Int) {
+    override suspend fun updatePictureIsFavorite(bool: Boolean, id: Int) =
         pictureDao.updatePictureIsFavorite(bool, id)
-    }
 
-    override fun getPictures(): Flow<List<Picture>> {
-        return pictureDao.getPictures()
-    }
-
-    override suspend fun searchPicture(urlStr: String): Resource<PictureResponse> {
-        return try {
+    override suspend fun searchPicture(urlStr: String): Resource<PictureResponse> =
+       try {
             val response = retrofitAPI.pictureSearch(urlStr)
             if(response.isSuccessful){
                 response.body()?.let {
@@ -42,5 +39,4 @@ class PictureRepository @Inject constructor(
         } catch (e: Exception){
             Resource.error("No data", null)
         }
-    }
 }

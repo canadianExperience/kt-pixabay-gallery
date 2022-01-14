@@ -13,7 +13,7 @@ import com.me.kt_pixabay_gallery.R
 import com.me.kt_pixabay_gallery.roomdb.Picture
 import javax.inject.Inject
 
-class TitleRecyclerViewAdapter @Inject constructor(
+class TitleRecyclerViewAdapter(
     private val glide: RequestManager
 ): RecyclerView.Adapter<TitleRecyclerViewAdapter.PictureViewHolder>(){
 

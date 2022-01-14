@@ -9,6 +9,6 @@ interface PictureRepositoryInterface {
     suspend fun insertPicture(picture: Picture)
     suspend fun deletePicture(picture: Picture)
     suspend fun updatePictureIsFavorite(bool: Boolean, id: Int)
-    fun getPictures(): Flow<List<Picture>>
+    fun showPictures(isFavorite: Boolean): Flow<List<Picture>>
     suspend fun searchPicture(urlStr: String): Resource<PictureResponse>
 }

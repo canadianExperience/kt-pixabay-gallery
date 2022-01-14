@@ -8,24 +8,27 @@
     <fragment
         android:id="@+id/titleFragment"
         android:name="com.me.kt_pixabay_gallery.ui.screens.title.view.TitleFragment"
-        android:label="TitleFragment"
+        android:label="Pixabay Gallery"
         tools:layout="@layout/fragment_title">
         <action
             android:id="@+id/titleFragment_to_addPictureFragment"
             app:destination="@id/addPictureFragment" />
+        <action
+            android:id="@+id/titleFragment_to_zoomPictureFragment"
+            app:destination="@id/zoomPictureFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPictureFragment"
         android:name="com.me.kt_pixabay_gallery.ui.screens.addpicture.view.AddPictureFragment"
-        android:label="AddPictureFragment"
-        tools:layout="@layout/fragment_add_picture">
-        <action
-            android:id="@+id/addPictureFragment_to_zoomPictureFragment"
-            app:destination="@id/zoomPictureFragment" />
-    </fragment>
+        android:label="Add Image"
+        tools:layout="@layout/fragment_add_picture"/>
     <fragment
         android:id="@+id/zoomPictureFragment"
-        android:name="com.me.kt_pixabay_gallery.ui.screens.ZoomPictureFragment"
-        android:label="ZoomPictureFragment"
-        tools:layout="@layout/fragment_zoom_picture"/>
+        android:name="com.me.kt_pixabay_gallery.ui.screens.zoom.view.ZoomPictureFragment"
+        android:label="Zoom Image"
+        tools:layout="@layout/fragment_zoom_picture">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>

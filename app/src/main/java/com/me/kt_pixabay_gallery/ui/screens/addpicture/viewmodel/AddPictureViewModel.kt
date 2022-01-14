@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.RequestManager
 import com.me.kt_pixabay_gallery.apimanager.model.PictureResponse
 import com.me.kt_pixabay_gallery.repository.PictureRepositoryInterface
 import com.me.kt_pixabay_gallery.roomdb.Picture
@@ -18,8 +19,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddPictureViewModel @Inject constructor(
-    private val repository: PictureRepositoryInterface
+    private val repository: PictureRepositoryInterface,
+    private val glide: RequestManager
 ): ViewModel() {
+
+    val glideRequestManager get() = glide
 
     private val addPictureEventChannel = Channel<AddPictureEvent>()
     val addPictureEvent =  addPictureEventChannel.receiveAsFlow()
@@ -53,7 +57,6 @@ class AddPictureViewModel @Inject constructor(
         repository.insertPicture(Picture(url, false))
         addPictureEventChannel.send(AddPictureEvent.NavigateBackToTitle)
     }
-
 
     sealed class AddPictureEvent{
         object NavigateBackToTitle : AddPictureEvent()
