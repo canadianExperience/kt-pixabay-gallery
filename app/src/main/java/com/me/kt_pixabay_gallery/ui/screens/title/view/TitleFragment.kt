@@ -7,15 +7,16 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.me.kt_pixabay_gallery.R
 import com.me.kt_pixabay_gallery.databinding.FragmentTitleBinding
 import com.me.kt_pixabay_gallery.ui.screens.title.viewmodel.TitleViewModel
+import com.me.kt_pixabay_gallery.util.Util.exhaustive
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
+
 @AndroidEntryPoint
 class TitleFragment : Fragment(R.layout.fragment_title) {
 
@@ -33,7 +34,7 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
         fragmentBinding = binding
 
         binding.add.setOnClickListener {
-            goToAddPictureFragment()
+           viewModel.onAddBtnClick()
         }
 
         binding.titleRecyclerView.apply {
@@ -42,7 +43,7 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
         }
 
         titleRecyclerViewAdapter.setOnItemClickListener {
-          goToZoomPictureFragment(it.first, it.second)
+            viewModel.onPictureClick(it.first, it.second)
         }
 
         titleRecyclerViewAdapter.apply {
@@ -59,7 +60,22 @@ class TitleFragment : Fragment(R.layout.fragment_title) {
             menuItem?.setIcon(icon)
         }
 
+        getTitleEvents()
+
         setHasOptionsMenu(true)
+    }
+
+    private fun getTitleEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewModel.titleEvent.collect { event->
+            when(event){
+                TitleViewModel.TitleEvent.NavigateToAddPictureFragment ->{
+                    goToAddPictureFragment()
+                }
+                is TitleViewModel.TitleEvent.NavigateToZoomPictureFragment -> {
+                    goToZoomPictureFragment(event.url, event.id)
+                }
+            }.exhaustive
+        }
     }
 
 

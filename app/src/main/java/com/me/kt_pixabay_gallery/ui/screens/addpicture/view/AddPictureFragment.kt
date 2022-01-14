@@ -70,17 +70,16 @@ class AddPictureFragment : Fragment(R.layout.fragment_add_picture) {
         }
     }
 
-    private fun getAddPictureEvents(){
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.addPictureEvent.collect { event->
-                when(event){
-                    is AddPictureViewModel.AddPictureEvent.NavigateBackToTitle -> {
-                        findNavController().popBackStack()
-                    }
-                }.exhaustive
-            }
+    private fun getAddPictureEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewModel.addPictureEvent.collect { event->
+            when(event){
+                is AddPictureViewModel.AddPictureEvent.NavigateBackToTitle -> {
+                    findNavController().popBackStack()
+                }
+            }.exhaustive
         }
     }
+
 
     override fun onDestroy() {
         fragmentBinding = null
