@@ -7,7 +7,7 @@ Retrofit, Hilt, MVVM, Room DB, Navigation, Glide, Flow
 
 - [@elenamelnikova](https://github.com/canadianExperience)
 
-## Screens demo
+## Screens Demo
 
 ![pixabay-gallery-screens](https://user-images.githubusercontent.com/45378000/157119603-7f580c6a-615f-485c-b6ea-8bba10cdb374.png)
 
